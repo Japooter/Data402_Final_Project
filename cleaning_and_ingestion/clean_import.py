@@ -15,7 +15,7 @@ connection_string = (
     'Server=127.0.0.1;'
     'Database=FinalProject;'
     'UID=sa;'
-    'PWD=<your password>;'
+    'PWD=Ducks123;'
     'Trusted_Connection=no;'
 )
 connection_url = sa.engine.URL.create(
@@ -188,12 +188,12 @@ def dobs_to_datetime(date_ofb):
         return date_ofb
 
 
-def capital_addresses(address_str):
+def capitalise(string):
     try:
-        address_str = address_str.title()
-        return address_str
+        string = string.title()
+        return string
     except:
-        return address_str
+        return string
 
 
 def get_txt_file_contents(bucket, key):
@@ -238,11 +238,12 @@ def clean_academy_csv():
     for col in cols:
         academy_data[col] = academy_data[col].apply(clean_whitespace)
 
-    academy_data['Category'] = academy_data['filename'].apply(get_category)
-    academy_data['Stream'] = academy_data['filename'].apply(get_stream)
-    academy_data['Date'] = academy_data['filename'].apply(get_date)
-    academy_data = academy_data[['Category', 'Stream', 'Date'] + [col for col in academy_data if
-                                                                  col not in ['Category', 'Stream', 'Date',
+    academy_data['name'] = academy_data['name'].apply(capitalise)
+    academy_data['category'] = academy_data['filename'].apply(get_category)
+    academy_data['stream'] = academy_data['filename'].apply(get_stream)
+    academy_data['date'] = academy_data['filename'].apply(get_date)
+    academy_data = academy_data[['category', 'stream', 'date'] + [col for col in academy_data if
+                                                                  col not in ['category', 'stream', 'date',
                                                                               'filename']]]
     return academy_data
 
@@ -257,6 +258,7 @@ def clean_talent_json():
     df['tech_self_score'] = df['tech_self_score'].apply(str)
     df['weaknesses'] = df['weaknesses'].apply(str)
     df['strengths'] = df['strengths'].apply(str)
+    df['name'] = df['name'].apply(capitalise)
 
     return df
 
@@ -274,7 +276,8 @@ def clean_talent_csv():
                                                        axis=1)
     talent_data = talent_data.drop(['invited_date', 'month'], axis=1)
     talent_data["dob"] = talent_data["dob"].apply(dobs_to_datetime)
-    talent_data['address'] = talent_data['address'].apply(capital_addresses)
+    talent_data['address'] = talent_data['address'].apply(capitalise)
+    talent_data['name'] = talent_data['name'].apply(capitalise)
 
     for column in list(talent_data.columns):
         talent_data[column] = talent_data[column].apply(clean_whitespace)
@@ -293,6 +296,8 @@ def clean_talent_txt():
     talent_txt_files['name'] = talent_txt_files['name'].str.strip()
     talent_txt_files['psychometric_score'] = talent_txt_files['psychometric_score'].astype(int)
     talent_txt_files['presentation_score'] = talent_txt_files['presentation_score'].astype(int)
+
+    talent_txt_files['name'] = talent_txt_files['name'].apply(capitalise)
 
     talent_txt_files['date'] = pd.to_datetime(talent_txt_files['date']).dt.date
 
