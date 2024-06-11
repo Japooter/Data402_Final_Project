@@ -15,7 +15,7 @@ connection_string = (
     'Server=127.0.0.1;'
     'Database=FinalProject;'
     'UID=sa;'
-    'PWD=Ducks123;'
+    'PWD=<your password>;'
     'Trusted_Connection=no;'
 )
 connection_url = sa.engine.URL.create(
