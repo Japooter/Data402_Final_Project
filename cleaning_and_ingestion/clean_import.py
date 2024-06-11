@@ -12,7 +12,7 @@ connection_string = (
     'Server=127.0.0.1;'
     'Database=FinalProject;'
     'UID=sa;'
-    'PWD=Ducks123;'
+    'PWD=<your_password>;'
     'Trusted_Connection=no;'
 )
 connection_url = sa.engine.URL.create(
@@ -242,7 +242,11 @@ def clean_talent_csv():
 
     return talent_data
 
-def clean_
+def clean_talent_txt():
+    bucket_name = 'data-402-final-project'
+    talent_prefix = 'Talent/'
+
+    txt_files = list_txt_files()
 
 
 def insert_into_sql(dataframe, engine, tablename):
