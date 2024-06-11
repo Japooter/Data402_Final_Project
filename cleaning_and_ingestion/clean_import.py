@@ -326,5 +326,5 @@ if __name__ == "__main__":
     # Talent txt
     print("Processing talent txt data!")
     talent_txt = clean_talent_txt()
-    insert_into_sql(talent_csv, engine, "Talent_TXT")
+    insert_into_sql(talent_txt, engine, "Talent_TXT")
     print("Successfully inserted talent txt data!")
