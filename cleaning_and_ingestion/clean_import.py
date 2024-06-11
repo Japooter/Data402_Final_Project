@@ -1,4 +1,7 @@
-import os, json, csv, boto3, datetime, pyodbc
+import boto3
+import datetime
+import json
+import re
 from io import StringIO
 
 import numpy as np
@@ -12,7 +15,7 @@ connection_string = (
     'Server=127.0.0.1;'
     'Database=FinalProject;'
     'UID=sa;'
-    'PWD=<your_password>;'
+    'PWD=Ducks123;'
     'Trusted_Connection=no;'
 )
 connection_url = sa.engine.URL.create(
@@ -112,6 +115,7 @@ def load_talent_csv_data(bucket, prefix):
             continue
     return pd.concat(data_frames, ignore_index=True)
 
+
 def list_txt_files(bucket, prefix):
     all_files = list_all_objects(bucket, prefix)
     txt_files = [file for file in all_files if file.endswith('.txt')]
@@ -192,6 +196,41 @@ def capital_addresses(address_str):
         return address_str
 
 
+def get_txt_file_contents(bucket, key):
+    # Retrieve the object from S3
+    response = s3.get_object(Bucket=bucket, Key=key)
+    # Read the content of the file
+    content = response['Body'].read().decode('utf-8')
+    return content
+
+
+def parse_txt_content(content):
+    lines = content.strip().split('\n')
+    date = lines[0]
+    academy = lines[1]
+    data = []
+    for line in lines[2:]:
+        match = re.match(r'(.+?) -\s+Psychometrics:\s+(\d+)/100,\s+Presentation:\s+(\d+)/32', line)
+        if match:
+            name = match.group(1).strip().title()
+            psychometrics = match.group(2).strip()
+            presentation = match.group(3).strip()
+            data.append([date, academy, name, psychometrics, presentation])
+    return data
+
+
+def combine_txt_files(bucket, prefix):
+    txt_files = list_txt_files(bucket, prefix)
+    all_data = []
+    for txt_file in txt_files:
+        content = get_txt_file_contents(bucket, txt_file)
+        file_data = parse_txt_content(content)
+        all_data.extend(file_data)
+
+    df = pd.DataFrame(all_data, columns=['date', 'academy', 'name', 'psychometric_score', 'presentation_score'])
+    return df
+
+
 def clean_academy_csv():
     academy_data = load_academy_data('data-402-final-project', 'Academy/')
 
@@ -242,11 +281,22 @@ def clean_talent_csv():
 
     return talent_data
 
+
 def clean_talent_txt():
     bucket_name = 'data-402-final-project'
     talent_prefix = 'Talent/'
 
-    txt_files = list_txt_files()
+    talent_txt_files = combine_txt_files(bucket_name, talent_prefix)
+
+    talent_txt_files['date'] = talent_txt_files['date'].str.strip()
+    talent_txt_files['academy'] = talent_txt_files['academy'].str.strip()
+    talent_txt_files['name'] = talent_txt_files['name'].str.strip()
+    talent_txt_files['psychometric_score'] = talent_txt_files['psychometric_score'].astype(int)
+    talent_txt_files['presentation_score'] = talent_txt_files['presentation_score'].astype(int)
+
+    talent_txt_files['date'] = pd.to_datetime(talent_txt_files['date']).dt.date
+
+    return talent_txt_files
 
 
 def insert_into_sql(dataframe, engine, tablename):
@@ -256,14 +306,25 @@ def insert_into_sql(dataframe, engine, tablename):
 
 if __name__ == "__main__":
     # Academy csv
+    print("Processing academy csv data!")
     academy_data = clean_academy_csv()
     insert_into_sql(academy_data, engine, "Academy_CSV")
     print("Successfully inserted academy csv data!")
 
+    # Talent json
+    print("Processing talent json data!")
     talent_json = clean_talent_json()
     insert_into_sql(talent_json, engine, "Talent_JSON")
     print("Successfully inserted talent json data!")
 
+    # Talent csv
+    print("Processing talent csv data!")
     talent_csv = clean_talent_csv()
     insert_into_sql(talent_csv, engine, "Talent_CSV")
     print("Successfully inserted talent csv data!")
+
+    # Talent txt
+    print("Processing talent txt data!")
+    talent_txt = clean_talent_txt()
+    insert_into_sql(talent_csv, engine, "Talent_TXT")
+    print("Successfully inserted talent txt data!")
