@@ -230,6 +230,10 @@ def combine_txt_files(bucket, prefix):
     df = pd.DataFrame(all_data, columns=['date', 'academy', 'name', 'psychometric_score', 'presentation_score'])
     return df
 
+def remove_wildcards(name):
+    new_name = re.sub("[^A-Za-z'' -]", "", name)
+    return new_name
+
 
 def clean_academy_csv():
     academy_data = load_academy_data('data-402-final-project', 'Academy/')
@@ -280,6 +284,8 @@ def clean_talent_csv():
     talent_data["dob"] = talent_data["dob"].apply(dobs_to_datetime)
     talent_data['address'] = talent_data['address'].apply(capitalise)
     talent_data['name'] = talent_data['name'].apply(capitalise)
+
+    talent_data['name'] = talent_data['name'].apply(remove_wildcards)
 
     for column in list(talent_data.columns):
         talent_data[column] = talent_data[column].apply(clean_whitespace)
