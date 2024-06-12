@@ -258,13 +258,15 @@ def clean_talent_json():
 
     json_files = check_talent_json_files(bucket_name, talent_prefix)
     df = pd.read_json(StringIO(json_files))
-    df = df.fillna('{}')
-    df['tech_self_score'] = df['tech_self_score'].apply(str)
+    #df = df.fillna('{}')
+    df['tech_self_score'] = df['tech_self_score'].apply(json.dumps)
     df['weaknesses'] = df['weaknesses'].apply(str)
     df['strengths'] = df['strengths'].apply(str)
     df['name'] = df['name'].apply(capitalise)
 
     df = df.drop_duplicates()
+
+    df['tech_self_score'] = df['tech_self_score'].replace('NaN', None)
 
     return df
 
