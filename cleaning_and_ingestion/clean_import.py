@@ -260,6 +260,8 @@ def clean_talent_json():
     df['strengths'] = df['strengths'].apply(str)
     df['name'] = df['name'].apply(capitalise)
 
+    df = df.drop_duplicates()
+
     return df
 
 
