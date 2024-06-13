@@ -347,7 +347,7 @@ def create_score_data(academy_data: pandas.DataFrame) -> pandas.DataFrame:
                                             var_name='variable', value_name='Score')
     academy_data_melted['week'] = academy_data_melted['variable'].str.extract(r'W(\d+)$')
     academy_data_melted['week'] = academy_data_melted['week'].apply(int)
-    academy_data_melted['Behaviour'] = academy_data_melted['variable'].str.extract(r'^(\w+)_')
+    academy_data_melted['behaviour'] = academy_data_melted['variable'].str.extract(r'^(\w+)_')
     academy_data_melted = academy_data_melted.drop(columns=['variable'])
 
     return academy_data_melted

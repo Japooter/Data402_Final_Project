@@ -22,7 +22,7 @@ academy_data = pd.read_sql("SELECT * FROM Academy_CSV",engine)
 academy_data_melted = academy_data.melt(id_vars=['category', 'stream', 'date', 'name', 'trainer'], var_name='variable', value_name='Score')
 academy_data_melted['Week'] = academy_data_melted['variable'].str.extract(r'W(\d+)$')
 academy_data_melted['Week'] = academy_data_melted['Week'].apply(int)
-academy_data_melted['Behaviour'] = academy_data_melted['variable'].str.extract(r'^(\w+)_')
+academy_data_melted['behaviour'] = academy_data_melted['variable'].str.extract(r'^(\w+)_')
 academy_data_melted = academy_data_melted.drop(columns=['variable'])
 
 
