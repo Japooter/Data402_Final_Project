@@ -396,17 +396,24 @@ This schema ensures that all relevant data is stored in a normalized form, facil
 
 ## Collaborators
 
-- Dafydd Lloyd
-- Jacqueline Onyemechi Ochonma
-- James O'Brien
-- Kazim Raza
-- Kehinde Giwa
-- Kyun Philip-Lessells
-- Sabrina Kaur
-- Samuel Smith
-- Yoonhee Lee
-- Luis Rodriguez Valido
-- Rajpal Aujla
+## Collaborators
+
+| Name                       |
+|----------------------------|
+| Dafydd Lloyd               |
+| Jacqueline Onyemechi Ochonma|
+| James O'Brien              |
+| Kazim Raza                 |
+| Kehinde Giwa               |
+| Kyun Philip-Lessells       |
+| Sabrina Kaur               |
+| Samuel Smith               |
+| Yoonhee Lee                |
+| Luis Rodriguez Valido      |
+| Rajpal Aujla               |
+
+
+
 
 
 ## Testing
