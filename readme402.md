@@ -403,19 +403,19 @@ This schema ensures that all relevant data is stored in a normalized form, facil
 ## Collaborators
 
 
-| Name                          |
-|-------------------------------|
-| Dafydd Lloyd                  |
-| Jacqueline Onyemechi Ochonma  |
-| James O'Brien (Product Owner) |
-| Kazim Raza                    |
-| Kehinde Giwa                  |
-| Kyun Philip-Lessells          |
-| Sabrina Kaur (Scrum Master)   |
-| Samuel Smith (Scrum Master)   |
-| Yoonhee Lee                   |
-| Luis Rodriguez Valido         |
-| Rajpal Aujla                  |
+| Name                                     |
+|------------------------------------------|
+| Dafydd Lloyd (Product Owner/Developer)   |
+| Jacqueline Onyemechi Ochonma (Developer) |
+| James O'Brien (Product Owner)            |
+| Kazim Raza (Developer)                   |
+| Kehinde Giwa (Developer)                 |
+| Kyun Philip-Lessells (Developer)         |
+| Sabrina Kaur (Scrum Master/Developer)    |
+| Samuel Smith (Scrum Master)              |
+| Yoonhee Lee (Developer)                  |
+| Luis Rodriguez Valido (Developer)        |
+| Rajpal Aujla (Developer)                 |             
 
 
 
@@ -431,79 +431,79 @@ Testing is an integral part of ensuring the reliability and correctness of the E
 
 1. ### Incorrect Bucket Name (Academy Data)
 
--  Description: Tests handling of exceptions when an incorrect bucket name is provided for Academy data extraction.
--  Test Code: `test_incorrect_bucket_academy()`
+-  **Description**: Tests handling of exceptions when an incorrect bucket name is provided for Academy data extraction.
+-  **Test Code**: `test_incorrect_bucket_academy()`
 
 2. ### Incorrect Bucket Name (Talent JSON Data)
 
-- Description: Tests handling of exceptions when an incorrect bucket name is provided for Talent JSON data extraction.
--  Test Code: `test_incorrect_bucket_talent_json()`
+- **Description**: Tests handling of exceptions when an incorrect bucket name is provided for Talent JSON data extraction.
+-  **Test Code**: `test_incorrect_bucket_talent_json()`
 
 3. ### Missing Prefix (Talent JSON Data)
 
--  Description: Tests handling of scenarios where no prefix is found in the S3 bucket for Talent JSON data extraction.
--  Test Code: `test_no_prefix_bucket_talent_json()`
+-  **Description**: Tests handling of scenarios where no prefix is found in the S3 bucket for Talent JSON data extraction.
+-  **Test Code**: `test_no_prefix_bucket_talent_json()`
 
 4. ### Incorrect Bucket Name (Talent TXT Data)
 
--  Description: Tests handling of exceptions when an incorrect bucket name is provided for Talent TXT data extraction.
--  Test Code: `test_incorrect_bucket_talent_txt()`
+-  **Description**: Tests handling of exceptions when an incorrect bucket name is provided for Talent TXT data extraction.
+-  **Test Code**: `test_incorrect_bucket_talent_txt()`
 
 5. ### Incorrect Bucket Name (Talent CSV Data)
 
--  Description: Tests handling of exceptions when an incorrect bucket name is provided for Talent CSV data extraction.
--  Test Code: `test_incorrect_bucket_talent_csv()`
+-  **Description**: Tests handling of exceptions when an incorrect bucket name is provided for Talent CSV data extraction.
+-  **Test Code**: `test_incorrect_bucket_talent_csv()`
 
 ## **Data Transformation**
 
 6. ### Whitespace Cleaning
 
--  Description: Tests the function `clean_whitespace()` for removing leading and trailing whitespaces.
--  Test Code: `test_whitespace()`
+-  **Description**: Tests the function `clean_whitespace()` for removing leading and trailing whitespaces.
+-  **Test Code**: `test_whitespace()`
 
 7. ### Month Cleaning
 
--  Description: Tests the function `clean_month()` for standardizing month names.
--  Test Code: `test_month_clean()`
+-  **Description**: Tests the function `clean_month()` for standardizing month names.
+-  **Test Code**: `test_month_clean()`
 
 8. ### Phone Number Formatting
 
--  Description: Tests the function `clean_phone_numbers()` for cleaning and formatting phone numbers.
--  Test Code: `test_number()`
+-  **Description**: Tests the function `clean_phone_numbers()` for cleaning and formatting phone numbers.
+-  **Test Code**: `test_number()`
 
 9. ### Date of Birth Conversion
 
--  Description: Tests the function `dobs_to_datetime()` for converting date strings to `datetime.date` objects.
--  Test Code: `test_dobs_conv()`
+-  **Description**: Tests the function `dobs_to_datetime()` for converting date strings to `datetime.date` objects.
+-  **Test Code**: `test_dobs_conv()`
 
 10. ### Capitalization
 
--  Description: Tests the function `capitalise()` for capitalizing strings correctly.
--  Test Code: `test_capitalisation()`
+-  **Description**: Tests the function `capitalise()` for capitalizing strings correctly.
+-  **Test Code**: `test_capitalisation()`
 
 ## **SQL Operations**
 
 11. ### Insertion into SQL Database
--  Description: Tests the function `insert_into_sql()` for inserting data into the SQL database.
--  Test Code: `test_wrong_sql_info()`
+-  **Description**: Tests the function `insert_into_sql()` for inserting data into the SQL database.
+-  **Test Code**: `test_wrong_sql_info()`
 
 
 **Additional Functionalities**
 
 12. ### Date Parsing
 
--  Description: Tests the function get_date() for parsing dates from string formats.
--  Test Code: test_get_date()
+-  **Description**: Tests the function get_date() for parsing dates from string formats.
+-  **Test Code**: test_get_date()
 
 13. ### Stream Extraction
 
--  Description: Tests the function `get_stream()` for extracting stream names from filenames.
--  Test Code: `test_get_stream()`
+-  **Description**: Tests the function `get_stream()` for extracting stream names from filenames.
+-  **Test Code**: `test_get_stream()`
 
 14. ### Category Extraction
 
--  Description: Tests the function `get_category()` for extracting category names from filenames.
--  Test Code: `test_get_category()`
+-  **Description**: Tests the function `get_category()` for extracting category names from filenames.
+-  **Test Code**: `test_get_category()`
 
 ```commandline
 from clean_import import *
