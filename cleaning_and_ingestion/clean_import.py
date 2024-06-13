@@ -234,6 +234,17 @@ def remove_wildcards(name):
     new_name = re.sub("[^A-Za-z'' -]", "", name)
     return new_name
 
+def replace_yes_no_bool(string):
+    out = None
+    try:
+        if string.lower() == "yes":
+            out = True
+        elif string.lower() == "no":
+            out = False
+        return out
+    except:
+        return None
+
 
 def clean_academy_csv():
     academy_data = load_academy_data('data-402-final-project', 'Academy/')
@@ -263,6 +274,9 @@ def clean_talent_json():
     df['weaknesses'] = df['weaknesses'].apply(str)
     df['strengths'] = df['strengths'].apply(str)
     df['name'] = df['name'].apply(capitalise)
+    df['self_development'] = df['self_development'].apply(replace_yes_no_bool)
+    df['geo_flex'] = df['geo_flex'].apply(replace_yes_no_bool)
+    df['financial_support_self'] = df['financial_support_self'].apply(replace_yes_no_bool)
 
     df = df.drop_duplicates()
 
@@ -320,7 +334,7 @@ def insert_into_sql(dataframe, engine, tablename):
 
 def create_score_data(academy_data):
 
-    academy_data_melted = academy_data.melt(id_vars=['Category', 'Stream', 'Date', 'ACname', 'trainer'],
+    academy_data_melted = academy_data.melt(id_vars=['category', 'stream', 'date', 'name', 'trainer'],
                                             var_name='variable', value_name='Score')
     academy_data_melted['Week'] = academy_data_melted['variable'].str.extract(r'_(W\d+)$')
     academy_data_melted['Behaviour'] = academy_data_melted['variable'].str.extract(r'^(\w+)_')
