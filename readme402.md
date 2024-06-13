@@ -53,25 +53,26 @@ To provide a clear overview of the ETL process, below is a diagram illustrating 
 
 ### 1. Install required software 
 
-- Install Python: Python Releases for Windows | Python.org 
+- Install Python: [Python Releases for Windows | Python.org ](https://www.python.org/downloads/windows/)
 
-- Install PyCharm: Download PyCharm: The Python IDE for data science and web development by JetBrains 
+- Install PyCharm: [Download PyCharm: The Python IDE for data science and web development by JetBrains](https://www.jetbrains.com/pycharm/download/?section=windows)
 
-- Install Docker: Install Docker Engine | Docker Docs 
+- Install Docker: [Install Docker Engine | Docker Docs](https://docs.docker.com/engine/install/)
 
-- Install Azure Data Studio: Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn
+- Install Azure Data Studio: [Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio?tabs=win-install%2Cwin-user-install%2Credhat-install%2Cwindows-uninstall%2Credhat-uninstall)
+
 
 ### 2. Install ODBS Driver
 
 
 ### 3. Clone the project repository to your local machine 
 
-- $ git clone … 
+- `$ git clone … `
 
 
 ### 4. Install the required python libraries on the Windows PowerShell/terminal 
 
-- pip install -r requirements.txt 
+- `pip install -r requirements.txt` 
 
 ### 5. Run scripts 
 
@@ -90,12 +91,12 @@ To provide a clear overview of the ETL process, below is a diagram illustrating 
 The Sparta global mock data was extracted from the Amazon S3 bucket 'data-402-final-project bucket which contained two further prefixes Talent and academy. 
 
 Talent contents: Data collected on the Sparta day event, contains information about candidate competency, the outcome of behaviour and their performance and various recruitment tests.
-- .json
-- .csv
-- .txt  
+- `.json`
+- `.csv`
+- `.txt`  
 
 Academy contents: Data collected from all the Spartans in the academy, with their names, courses and what score they were getting in their weekly tests.
-- .csv 
+- `.csv` 
 
 ## Transformation
 
