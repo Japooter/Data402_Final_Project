@@ -1,4 +1,5 @@
-[16:58] Kyrun Philip-Lessells
+DROP TABLE IF EXISTS TempTable
+ 
 SELECT
     Applicant_ID,
     name AS "Applicant_Name",
@@ -15,8 +16,25 @@ SELECT
     financial_support_self AS "Financial_Support_Self",
     course_interest AS "Course_Interest",
     psychometric_score AS "Psychometric_Score",
-    Presentation_Score AS "Presentation_Score",
+    presentation_Score AS "Presentation_Score",
     result AS "Result",
     Talent_Coordinator_ID
-INTO TempTable
-FROM Applicants;
+FROM Applicants
+
+EXEC sp_rename 'Applicants', 'Dropped'
+EXEC sp_rename 'TempTable', 'Applicants'
+
+ALTER TABLE Applicants
+ADD CONSTRAINT Applicant_ID PRIMARY KEY (Applicant_ID)
+
+ALTER TABLE Applicants
+ADD FOREIGN KEY (Address_ID) REFERENCES Address(Address_ID)
+
+ALTER TABLE Applicants
+ADD FOREIGN KEY (Sparta_Day_ID) REFERENCES Sparta_Day(Sparta_Day_ID)
+
+ALTER TABLE Applicants
+ADD FOREIGN KEY (Uni_ID) REFERENCES Uni(Uni_ID)
+
+ALTER TABLE Applicants
+ADD FOREIGN KEY (Talent_Coordinator_ID) REFERENCES Talent_Coordinator(Talent_Coordinator_ID)
