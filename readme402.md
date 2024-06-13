@@ -20,6 +20,9 @@
 
 ## Introduction
 
+
+![Alt text](pipeline.drawio.png)
+
 ## Setup instructions 
 
 ## Extraction
