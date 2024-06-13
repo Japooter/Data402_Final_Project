@@ -20,7 +20,7 @@
 
 ## Introduction
 
-
+### Data Pipeline Diagram
 ![Alt text](pipeline.drawio.png)
 
 ## Setup instructions 
