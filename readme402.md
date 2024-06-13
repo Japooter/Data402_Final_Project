@@ -22,11 +22,11 @@
 
 ### Project overview 
 
-Task: 
+**Task:** 
 
 Create an ETL pipeline from mock data from a fictionalised version of Sparta global and generate some analytical insights to present to stakeholders. 
 
-Task Requirements:
+**Task Requirements:**
 
 - The code needs to be at production-level (easily reuseable). 
 
@@ -34,7 +34,7 @@ Task Requirements:
 
  
 
-Prerequisites 
+**Prerequisites:**
 
 The following requirements have to be met for the ETL pipeline to run successfully:
 
