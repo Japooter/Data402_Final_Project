@@ -466,6 +466,11 @@ FOREIGN KEY (Category_ID) REFERENCES Categories(Category_ID);
 ALTER TABLE Streams_Junction
 ADD CONSTRAINT fk_ApplicantID
 FOREIGN KEY (Applicant_ID) REFERENCES Applicants(Applicant_ID);
+
+ALTER TABLE Streams_Junction
+ADD CONSTRAINT fk_StreamID_j
+FOREIGN KEY (Stream_ID) REFERENCES Streams(Stream_ID);
+
 ---------------------------------------------------------------------------------------------------------
 --Drop tables if they already exist
 
@@ -516,10 +521,16 @@ FROM #Tech_Self_Score_unpvt;
 
 -- Create applicant/tech junction table
 CREATE TABLE Applicant_Tech_jct (
-   Applicant_ID int FOREIGN KEY REFERENCES Applicants(Applicant_ID) NOT NULL,
-   Tech_ID int FOREIGN KEY REFERENCES Tech_Skill(Tech_ID) NOT NULL,
-   Score int NOT NULL
+   Applicant_ID int NOT NULL,
+   Tech_ID int  NOT NULL,
+   Score int NOT NULL,
 )
+
+ALTER TABLE Applicant_Tech_jct
+ADD CONSTRAINT fk_applicant_tech FOREIGN KEY (Applicant_ID) REFERENCES Applicants(Applicant_ID);
+
+ALTER TABLE Applicant_Tech_jct
+ADD CONSTRAINT fk_tech FOREIGN KEY (Tech_ID) REFERENCES Tech_Skill(Tech_ID);
 
 -- Insert values into applicant/tech junction table
 INSERT INTO Applicant_Tech_jct
@@ -604,51 +615,84 @@ ALTER TABLE Score_Junction
 ADD CONSTRAINT pk_Score_Junction_ID PRIMARY KEY (Applicant_ID, Behaviour_ID, week);
 
 ---------------------------------------------------------------------------------------
--- DROP TABLE IF EXISTS TempTable
+DROP TABLE IF EXISTS TempTable
   
--- SELECT
---     Applicant_ID,
---     name AS "Applicant_Name",
---     gender AS "Gender",
---     dob AS "DOB",
---     email AS "Email",
---     phone_number AS "Phone_Number",
---     Address_ID,
---     Uni_ID,
---     degree AS "Degree",
---     Sparta_Day_ID,
---     self_development AS "Self_Development",
---     geo_flex AS "Geo_Flex",
---     financial_support_self AS "Financial_Support_Self",
---     course_interest AS "Course_Interest",
---     psychometric_score AS "Psychometric_Score",
---     presentation_Score AS "Presentation_Score",
---     result AS "Result",
---     Talent_Coordinator_ID
--- INTO TempTable
--- FROM Applicants
+SELECT
+    Applicant_ID,
+    name AS "Applicant_Name",
+    gender AS "Gender",
+    dob AS "DOB",
+    email AS "Email",
+    phone_number AS "Phone_Number",
+    Address_ID,
+    Uni_ID,
+    degree AS "Degree",
+    Sparta_Day_ID,
+    self_development AS "Self_Development",
+    geo_flex AS "Geo_Flex",
+    financial_support_self AS "Financial_Support_Self",
+    course_interest AS "Course_Interest",
+    psychometric_score AS "Psychometric_Score",
+    presentation_Score AS "Presentation_Score",
+    result AS "Result",
+    Talent_Coordinator_ID
+INTO TempTable
+FROM Applicants
 
--- EXEC sp_rename 'Applicants', 'Dropped'
--- EXEC sp_rename 'TempTable', 'Applicants'
+EXEC sp_rename 'Applicants', 'Dropped'
+EXEC sp_rename 'TempTable', 'Applicants'
 
--- ALTER TABLE Applicants
--- ADD CONSTRAINT Applicant_ID PRIMARY KEY (Applicant_ID)
+ALTER TABLE Applicants
+ADD CONSTRAINT Applicant_ID PRIMARY KEY (Applicant_ID)
 
--- ALTER TABLE Applicants
--- ADD FOREIGN KEY (Address_ID) REFERENCES Address(Address_ID)
+ALTER TABLE Applicants
+ADD FOREIGN KEY (Address_ID) REFERENCES Address(Address_ID)
 
--- ALTER TABLE Applicants
--- ADD FOREIGN KEY (Sparta_Day_ID) REFERENCES Sparta_Day(Sparta_Day_ID)
+ALTER TABLE Applicants
+ADD FOREIGN KEY (Sparta_Day_ID) REFERENCES Sparta_Day(Sparta_Day_ID)
 
--- ALTER TABLE Applicants
--- ADD FOREIGN KEY (UNI_ID) REFERENCES Uni(UNI_ID)
+ALTER TABLE Applicants
+ADD FOREIGN KEY (UNI_ID) REFERENCES Uni(UNI_ID)
 
--- ALTER TABLE Applicants
--- ADD FOREIGN KEY (Talent_Coordinator_ID) REFERENCES Talent_Coordinators(Talent_Coordinator_ID)
+ALTER TABLE Applicants
+ADD FOREIGN KEY (Talent_Coordinator_ID) REFERENCES Talent_Coordinators(Talent_Coordinator_ID)
 
--- DROP TABLE Talent_CSV
--- DROP TABLE Talent_JSON
--- DROP TABLE Talent_TXT
--- DROP TABLE Academy_CSV
--- DROP TABLE Score
--- DROP TABLE Dropped
+ALTER TABLE applicant_weakness_junction
+DROP CONSTRAINT FK_applicant;
+
+ALTER TABLE applicant_weakness_junction
+ADD CONSTRAINT FK_applicant_weakness FOREIGN KEY (Applicant_ID) REFERENCES Applicants (Applicant_ID);
+
+ALTER TABLE applicant_strengths_junction
+DROP CONSTRAINT FK_applicant_strength;
+
+ALTER TABLE applicant_strengths_junction
+ADD CONSTRAINT FK_applicant_strength FOREIGN KEY (Applicant_ID) REFERENCES Applicants (Applicant_ID);
+
+ALTER TABLE Streams_Junction
+DROP CONSTRAINT fk_ApplicantID;
+
+ALTER TABLE Streams_Junction
+ADD CONSTRAINT FK_applicant_stream FOREIGN KEY (Applicant_ID) REFERENCES Applicants (Applicant_ID);
+
+ALTER TABLE Applicant_Tech_jct
+DROP CONSTRAINT fk_applicant_tech;
+
+ALTER TABLE Applicant_Tech_jct
+ADD CONSTRAINT FK_applicant_tech FOREIGN KEY (Applicant_ID) REFERENCES Applicants (Applicant_ID);
+
+ALTER TABLE Score_Junction
+DROP CONSTRAINT fk_Applicant_ID;
+
+ALTER TABLE Score_Junction
+ADD CONSTRAINT FK_applicant_score FOREIGN KEY (Applicant_ID) REFERENCES Applicants (Applicant_ID);
+GO
+
+
+
+DROP TABLE Talent_CSV
+DROP TABLE Talent_JSON
+DROP TABLE Talent_TXT
+DROP TABLE Academy_CSV
+DROP TABLE Score
+DROP TABLE Dropped
