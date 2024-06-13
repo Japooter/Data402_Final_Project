@@ -33,7 +33,7 @@ ADD FOREIGN KEY (Address_ID) REFERENCES Address(Address_ID)
 ALTER TABLE Applicants
 ADD FOREIGN KEY (Sparta_Day_ID) REFERENCES Sparta_Day(Sparta_Day_ID)
 
-ALTER TABLE Applicants
+ALTER TABLE Applicantsd
 ADD FOREIGN KEY (Uni_ID) REFERENCES Uni(Uni_ID)
 
 ALTER TABLE Applicants
