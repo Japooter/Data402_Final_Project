@@ -1,4 +1,3 @@
-[16:58] Kyrun Philip-Lessells
 SELECT
     Applicant_ID,
     name AS "Applicant_Name",
@@ -15,8 +14,12 @@ SELECT
     financial_support_self AS "Financial_Support_Self",
     course_interest AS "Course_Interest",
     psychometric_score AS "Psychometric_Score",
-    Presentation_Score AS "Presentation_Score",
+    presentation_Score AS "Presentation_Score",
     result AS "Result",
     Talent_Coordinator_ID
 INTO TempTable
 FROM Applicants;
+ORDER BY Applicant_ID
+
+EXEC sp_rename 'Applicants', 'Dropped'
+EXEC sp_rename 'TempTable', 'Applicants'
