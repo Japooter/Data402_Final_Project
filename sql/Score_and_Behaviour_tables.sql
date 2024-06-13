@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS Score_Junction
 DROP TABLE IF EXISTS Behaviour
 
-
 SELECT name, behaviour, week, score
 INTO Score_Junction
 FROM Score
@@ -16,7 +15,7 @@ SET Applicant_ID = (SELECT Applicant_ID FROM Applicants WHERE Applicants.name = 
 -- Remove name column from Score_Junction table:
 ALTER TABLE Score_Junction DROP COLUMN name;
 
--- Add NOT NULL contraint:
+-- Add NOT NULL constraint:
 ALTER TABLE Score_Junction
 ALTER COLUMN Applicant_ID INT NOT NULL;
 
@@ -41,14 +40,23 @@ ALTER TABLE Score_Junction ADD Behaviour_ID INT;
 UPDATE Score_Junction
 SET Behaviour_ID = (SELECT Behaviour_ID FROM Behaviour WHERE Behaviour.Behaviour = Score_Junction.Behaviour);
 
+
 -- Remove Behaviour column from Score_Junction table:
 ALTER TABLE Score_Junction DROP COLUMN Behaviour;
 
--- Add NOT NULL contraint:
+-- Add NOT NULL constraint:
 ALTER TABLE Score_Junction
 ALTER COLUMN Behaviour_ID INT NOT NULL;
+
+-- Add NOT NULL constraint:
+ALTER TABLE Score_Junction
+ALTER COLUMN week INT NOT NULL;
 
 -- Add a foreign key to the Behaviour_ID column in Score_Junction table:
 ALTER TABLE Score_Junction
 ADD CONSTRAINT fk_Behaviour_ID
 FOREIGN KEY (Behaviour_ID) REFERENCES Behaviour(Behaviour_ID);
+
+-- change foreign keys to composite key
+ALTER TABLE Score_Junction
+ADD CONSTRAINT pk_Score_Junction_ID PRIMARY KEY (Applicant_ID, Behaviour_ID, week);
