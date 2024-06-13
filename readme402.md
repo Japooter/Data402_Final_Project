@@ -20,7 +20,31 @@
 
 ## Introduction
 
+### Project overview 
 
+Task: 
+
+Create an ETL pipeline from mock data from a fictionalised version of Sparta global and generate some analytical insights to present to stakeholders. 
+
+Task Requirements:
+
+- The code needs to be at production-level (easily reuseable). 
+
+- Have an appropriate data store that will house all the data drawn from the files, the database should provide a single-person view. 
+
+ 
+
+Prerequisites 
+
+The following requirements have to be met for the ETL pipeline to run successfully:
+
+- Ensure the latest version of python has been installed. 
+
+- Ensure you have PyCharm, Docker and Azure studio installed and running correctly. 
+
+- Required python libraries to import: boto3, pandas, NumPy, pytest, json, SQL alchemy (requirements.txt). 
+
+- Credentials to access the ‘data-402-final-project’ S3 bucket needs to be requested from Sparta Global. 
 
 ### Data Pipeline Diagram
 To provide a clear overview of the ETL process, below is a diagram illustrating the various steps involved in the pipeline:
@@ -29,11 +53,104 @@ To provide a clear overview of the ETL process, below is a diagram illustrating 
 
 ## Setup instructions 
 
-## Extraction
+1. Install required software 
 
+- Install Python: Python Releases for Windows | Python.org 
+
+- Install PyCharm: Download PyCharm: The Python IDE for data science and web development by JetBrains 
+
+- Install Docker: Install Docker Engine | Docker Docs 
+
+- Install Azure Data Studio: Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn
+
+2. Install ODBS Driver: 
+
+
+3. Clone the project repository to your local machine 
+
+- $ git clone … 
+
+
+4. Install the required python libraries on the Windows PowerShell/terminal 
+
+- pip install -r requirements.txt 
+
+5. Run scripts 
+
+- Extraction script 
+
+- Transformation script 
+
+- Load script 
+
+- Merge script 
+
+- Test script 
+
+
+## Extraction
+The Sparta global mock data was extracted from the Amazon S3 bucket 'data-402-final-project bucket which contained two further prefixes Talent and academy. 
+
+Talent contents: Data collected on the Sparta day event, contains information about candidate competency, the outcome of behaviour and their performance and various recruitment tests.
+- .json
+- .csv
+- .txt  
+
+Academy contents: Data collected from all the Spartans in the academy, with their names, courses and what score they were getting in their weekly tests.
+- .csv 
+- 
 ## Transformation
 
+### JSON files: 
 
+The Talent JSON files were loaded into a pandas DataFrame 
+
+NaN values were identified  in the tech_self_score column and were converted into an empty dictionary string, ‘{}'. 
+
+We also converted the strengths and weaknesses columns to strings. 
+
+Duplicate rows were identified and dropped. 
+
+### Academy CSV files: 
+
+The academy CSV files were loaded into a pandas DataFrame 
+
+Whitespace was cleaned before and after the entry of each string. 
+
+The category, stream name and start data from each CSV filenames were extracted and assigned to corresponding candidates. 
+
+Checked for duplicate and null values but there were none. 
+
+### Talent CSV files: 
+
+The talent CSV files were loaded into a pandas DataFrame 
+
+Special characters such as "-", " ", "(", and ")" were removed from the phone number column. 
+
+All the month names were standardised to the format "full month name-year" (e.g., "September-2019"). 
+
+The ‘invite_date’ (date of the month of their Sparta day) and ‘month’ was merged into a single column specifying ‘sparta_day_date’, ensuring it is of type ‘datetime.date’. 
+
+The ‘invite_date’ and ‘month’ columns were dropped. 
+
+The ‘dob’ (date of birth) column was enforced with the ‘datetime.date’ type for proper date interpretation. 
+
+Ensured the correct capitalisation of names in "First Last" format and street addresses. 
+
+All the leading and trailing whitespaces for all columns were removed. 
+
+
+### Talent TXT files: 
+
+The talent txt files were loaded into a pandas DataFrame. 
+
+Whitespace characters were removed from the ‘date’, ‘name’ and ‘academy column  
+
+The ‘psychometric_score’ and ‘presentation_score’ columns were converted into the integer data type 
+
+Checked for duplicate and null values but there were none. 
+
+The ‘date’ column was converted into the ‘datetime.date’ format 
 
 ## Loading
 
