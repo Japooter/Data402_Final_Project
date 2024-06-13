@@ -98,7 +98,7 @@ Talent contents: Data collected on the Sparta day event, contains information ab
 
 Academy contents: Data collected from all the Spartans in the academy, with their names, courses and what score they were getting in their weekly tests.
 - .csv 
-- 
+
 ## Transformation
 
 ### JSON files: 
@@ -396,7 +396,6 @@ This schema ensures that all relevant data is stored in a normalized form, facil
 
 ## Collaborators
 
-## Collaborators
 
 | Name                       |
 |----------------------------|
