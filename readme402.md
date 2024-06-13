@@ -24,6 +24,7 @@
 
 ### Data Pipeline Diagram
 To provide a clear overview of the ETL process, below is a diagram illustrating the various steps involved in the pipeline:
+
 ![Alt text](pipeline.drawio.png)
 
 ## Setup instructions 
