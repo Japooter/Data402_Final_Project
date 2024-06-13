@@ -53,7 +53,7 @@ To provide a clear overview of the ETL process, below is a diagram illustrating 
 
 ## Setup instructions 
 
-1. Install required software 
+### 1. Install required software 
 
 - Install Python: Python Releases for Windows | Python.org 
 
@@ -63,19 +63,19 @@ To provide a clear overview of the ETL process, below is a diagram illustrating 
 
 - Install Azure Data Studio: Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn
 
-2. Install ODBS Driver
+### 2. Install ODBS Driver
 
 
-3. Clone the project repository to your local machine 
+### 3. Clone the project repository to your local machine 
 
 - $ git clone … 
 
 
-4. Install the required python libraries on the Windows PowerShell/terminal 
+### 4. Install the required python libraries on the Windows PowerShell/terminal 
 
 - pip install -r requirements.txt 
 
-5. Run scripts 
+### 5. Run scripts 
 
 - Extraction script 
 
