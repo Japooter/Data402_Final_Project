@@ -63,7 +63,7 @@ To provide a clear overview of the ETL process, below is a diagram illustrating 
 
 - Install Azure Data Studio: Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn
 
-2. Install ODBS Driver: 
+2. Install ODBS Driver
 
 
 3. Clone the project repository to your local machine 
@@ -103,54 +103,54 @@ Academy contents: Data collected from all the Spartans in the academy, with thei
 
 ### JSON files: 
 
-The Talent JSON files were loaded into a pandas DataFrame 
+- The Talent JSON files were loaded into a pandas DataFrame 
 
-NaN values were identified  in the tech_self_score column and were converted into an empty dictionary string, ‘{}'. 
+- NaN values were identified  in the tech_self_score column and were converted into an empty dictionary string, ‘{}'. 
 
-We also converted the strengths and weaknesses columns to strings. 
+- We also converted the strengths and weaknesses columns to strings. 
 
-Duplicate rows were identified and dropped. 
+- Duplicate rows were identified and dropped. 
 
 ### Academy CSV files: 
 
-The academy CSV files were loaded into a pandas DataFrame 
+- The academy CSV files were loaded into a pandas DataFrame 
 
-Whitespace was cleaned before and after the entry of each string. 
+- Whitespace was cleaned before and after the entry of each string. 
 
-The category, stream name and start data from each CSV filenames were extracted and assigned to corresponding candidates. 
+- The category, stream name and start data from each CSV filenames were extracted and assigned to corresponding candidates. 
 
-Checked for duplicate and null values but there were none. 
+- Checked for duplicate and null values but there were none. 
 
 ### Talent CSV files: 
 
-The talent CSV files were loaded into a pandas DataFrame 
+- The talent CSV files were loaded into a pandas DataFrame 
 
-Special characters such as "-", " ", "(", and ")" were removed from the phone number column. 
+- Special characters such as "-", " ", "(", and ")" were removed from the phone number column. 
 
-All the month names were standardised to the format "full month name-year" (e.g., "September-2019"). 
+- All the month names were standardised to the format "full month name-year" (e.g., "September-2019"). 
 
-The ‘invite_date’ (date of the month of their Sparta day) and ‘month’ was merged into a single column specifying ‘sparta_day_date’, ensuring it is of type ‘datetime.date’. 
+- The ‘invite_date’ (date of the month of their Sparta day) and ‘month’ was merged into a single column specifying ‘sparta_day_date’, ensuring it is of type ‘datetime.date’. 
 
-The ‘invite_date’ and ‘month’ columns were dropped. 
+- The ‘invite_date’ and ‘month’ columns were dropped. 
 
-The ‘dob’ (date of birth) column was enforced with the ‘datetime.date’ type for proper date interpretation. 
+- The ‘dob’ (date of birth) column was enforced with the ‘datetime.date’ type for proper date interpretation. 
 
-Ensured the correct capitalisation of names in "First Last" format and street addresses. 
+- Ensured the correct capitalisation of names in "First Last" format and street addresses. 
 
-All the leading and trailing whitespaces for all columns were removed. 
+- All the leading and trailing whitespaces for all columns were removed. 
 
 
 ### Talent TXT files: 
 
-The talent txt files were loaded into a pandas DataFrame. 
+- The talent txt files were loaded into a pandas DataFrame. 
 
-Whitespace characters were removed from the ‘date’, ‘name’ and ‘academy column  
+- Whitespace characters were removed from the ‘date’, ‘name’ and ‘academy column  
 
-The ‘psychometric_score’ and ‘presentation_score’ columns were converted into the integer data type 
+- The ‘psychometric_score’ and ‘presentation_score’ columns were converted into the integer data type 
 
-Checked for duplicate and null values but there were none. 
+- Checked for duplicate and null values but there were none. 
 
-The ‘date’ column was converted into the ‘datetime.date’ format 
+- The ‘date’ column was converted into the ‘datetime.date’ format 
 
 ## Loading
 
