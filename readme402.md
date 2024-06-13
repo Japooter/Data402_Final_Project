@@ -101,6 +101,9 @@ Academy contents: Data collected from all the Spartans in the academy, with thei
 
 ## Transformation
 
+Image to show which columns are found in the different files:
+![Alt text](files.png)
+
 ### JSON files: 
 
 - The Talent JSON files were loaded into a pandas DataFrame 
@@ -276,9 +279,13 @@ if __name__ == "__main__":
 By following this process, we ensure that our data is stored in a well-structured and efficient manner, ready for any further analysis and reporting required.
 
 
+
 ## Data Schema
 
 The database schema for the Final Project ETL pipeline consists of multiple interconnected tables designed to store and manage the extracted and transformed data efficiently. Below is a description of each table, including its columns and relationships:
+
+### Entity Relationship Diagram
+![Alt text](erd.png)
 
 ### APPLICANTS
 
@@ -397,19 +404,19 @@ This schema ensures that all relevant data is stored in a normalized form, facil
 ## Collaborators
 
 
-| Name                       |
-|----------------------------|
-| Dafydd Lloyd               |
-| Jacqueline Onyemechi Ochonma|
-| James O'Brien              |
-| Kazim Raza                 |
-| Kehinde Giwa               |
-| Kyun Philip-Lessells       |
-| Sabrina Kaur               |
-| Samuel Smith               |
-| Yoonhee Lee                |
-| Luis Rodriguez Valido      |
-| Rajpal Aujla               |
+| Name                          |
+|-------------------------------|
+| Dafydd Lloyd                  |
+| Jacqueline Onyemechi Ochonma  |
+| James O'Brien (Product Owner) |
+| Kazim Raza                    |
+| Kehinde Giwa                  |
+| Kyun Philip-Lessells          |
+| Sabrina Kaur (Scrum Master)   |
+| Samuel Smith (Scrum Master)   |
+| Yoonhee Lee                   |
+| Luis Rodriguez Valido         |
+| Rajpal Aujla                  |
 
 
 
