@@ -318,6 +318,16 @@ def insert_into_sql(dataframe, engine, tablename):
     dataframe.to_sql(tablename, engine, schema="dbo", if_exists="replace", index=False)
     return
 
+def create_score_data(academy_data):
+
+    academy_data_melted = academy_data.melt(id_vars=['Category', 'Stream', 'Date', 'ACname', 'trainer'],
+                                            var_name='variable', value_name='Score')
+    academy_data_melted['Week'] = academy_data_melted['variable'].str.extract(r'_(W\d+)$')
+    academy_data_melted['Behaviour'] = academy_data_melted['variable'].str.extract(r'^(\w+)_')
+    academy_data_melted = academy_data_melted.drop(columns=['variable'])
+
+    return academy_data_melted
+
 
 if __name__ == "__main__":
     # Academy csv
@@ -343,3 +353,7 @@ if __name__ == "__main__":
     talent_txt = clean_talent_txt()
     insert_into_sql(talent_txt, engine, "Talent_TXT")
     print("Successfully inserted talent txt data!")
+
+    # Create Score table
+    academy_data_melted = create_score_data(academy_data)
+    insert_into_sql(academy_data_melted, engine, "Score")
