@@ -690,19 +690,19 @@ For testing, we utilised pytest as our testing framework, leveraging its capabil
 ## Collaborators
 
 
-| Name                                     |
-|------------------------------------------|
-| Dafydd Lloyd (Product Owner/Developer)   |
-| Jacqueline Onyemechi Ochonma (Developer) |
-| James O'Brien (Product Owner)            |
-| Kazim Raza (Developer)                   |
-| Kehinde Giwa (Developer)                 |
-| Kyun Philip-Lessells (Developer)         |
-| Sabrina Kaur (Scrum Master/Developer)    |
-| Samuel Smith (Scrum Master)              |
-| Yoonhee Lee (Developer)                  |
-| Luis Rodriguez Valido (Developer)        |
-| Rajpal Aujla (Developer)                 |  
+| Name                                                |
+|-----------------------------------------------------|
+| Dafydd Lloyd (Scrum Master/Product Owner/Developer) |
+| Jacqueline Onyemechi Ochonma (Developer)            |
+| James O'Brien (Product Owner/Developer)             |
+| Kazim Raza (Product Owner/Developer)                |
+| Kehinde Giwa (Developer)                            |
+| Kyrun Philip-Lessells (Product Owner/Developer)     |
+| Sabrina Kaur (Scrum Master/Developer)               |
+| Samuel Smith (Scrum Master/Developer)               |
+| Yoonhee Lee (Scrum Master/Developer)                |
+| Luis Rodriguez Valido (Developer)                   |
+| Rajpal Aujla (Developer)                            |  
 
 ## Licensing
 
