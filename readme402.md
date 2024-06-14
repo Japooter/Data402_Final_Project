@@ -76,41 +76,59 @@ By addressing these challenges and continuously refining our process, we were ab
 
 ## Setup instructions 
 
-### 1. Install required software 
+### 1. Install required software
 
-- Install Python: [Python Releases for Windows | Python.org ](https://www.python.org/downloads/windows/)
+1. Install Python: [Python Releases | Python.org ](https://www.python.org/downloads/)
 
-- Install PyCharm: [Download PyCharm: The Python IDE for data science and web development by JetBrains](https://www.jetbrains.com/pycharm/download/?section=windows)
+2. Install Docker: [Install Docker Engine | Docker Docs](https://docs.docker.com/engine/install/)
 
-- Install Docker: [Install Docker Engine | Docker Docs](https://docs.docker.com/engine/install/)
-
-- Install Azure Data Studio: [Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio?tabs=win-install%2Cwin-user-install%2Credhat-install%2Cwindows-uninstall%2Credhat-uninstall)
+3. Install Azure Data Studio: [Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio)
 
 
 ### 2. Install ODBS Driver
 
+1. Install ODBS 17 driver: [Download ODBC Driver for SQL Server](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16#version-17)
 
-### 3. Clone the project repository to your local machine 
+### 3. Setup azure sql edge Docker container
 
-- `$ git clone … `
+***Note:*** *If you are not on Windows, preface these commands with sudo*
+
+1. Pull the Azure SQL Edge container
+ `docker pull mcr.microsoft.com/azure-sql-edge:latest`
+
+2. Deploy the container using
+ `docker run --cap-add SYS_PTRACE -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD=yourStrong(!)Password -p 1433:1433 --name azuresqledge -d mcr.microsoft.com/azure-sql-edge`
+
+### 4. Connect with Azure Data Studio
+
+ 1. Open Azure Data Studio
+ 2. Create a Connection
+ 3. Use details
+    - Connection type: `Microsoft SQL Server`
+    - Server: `localhost,1433`
+    - Authenitcation type: `SQL Login`
+    - User name: `sa`
+    - Password: `yourStrong(!)Password`
+    - Trust server certificate: `True`
+ 4. After connecting, run the code `CREATE DATABASE FinalProject;`
 
 
-### 4. Install the required python libraries on the Windows PowerShell/terminal 
+### 5. Clone the project repository to your local machine
 
-- `pip install -r requirements.txt` 
+1. `$ git clone https://github.com/Japooter/Data402_Final_Project.git`
 
-### 5. Run scripts 
 
-- Extraction script 
+### 6. Install the required python libraries on the Windows PowerShell/terminal
 
-- Transformation script 
+1. `pip install -r requirements.txt`
 
-- Load script 
+### 5. Run scripts
+ 1. First run the main.py file with your parameters
+    - `python -m main -server 127.0.0.1 -db FinalProject -user sa -password yourStrong(!)Password`
+ 2. Open the file [sql/Complete_Code.sql](sql/Complete_Code.sql) in Azure Data Studio
+ 3. Run the Complete_Code.sql file
 
-- Merge script 
-
-- Test script 
-
+### 6. Congratulations, you now have the complete database setup
 
 ## Extraction
 The Sparta global mock data was extracted from the Amazon S3 bucket 'data-402-final-project bucket which contained two further prefixes Talent and academy. 
