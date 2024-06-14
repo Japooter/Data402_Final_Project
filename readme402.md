@@ -443,14 +443,17 @@ Normalization typically involves organizing the columns and tables of a database
 ![Alt text](images/k3.png)
 
 **Joining all data via name for further data exploration.**
+
 ![Alt text](images/k4.png)
 
 
 **Removing any columns that are irrelevant to match the schema.**
+
 ![Alt text](images/k5.png)
 
 
 **Adding a primary for unique indexing.**
+
 ![Alt text](images/k6.png)
 
 ## Testing
