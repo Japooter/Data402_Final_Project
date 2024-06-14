@@ -118,7 +118,7 @@ By addressing these challenges and continuously refining our process, we were ab
 1. `$ git clone https://github.com/Japooter/Data402_Final_Project.git`
 
 
-### 6. Install the required python libraries on the Windows PowerShell/terminal
+### 6. Install the required python libraries
 
 1. `pip install -r requirements.txt`
 
