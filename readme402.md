@@ -1,16 +1,16 @@
 # Data 402 Final Project
-![Alt text](images.png)
+![Alt text](images/images.png)
 
 
 ## Table of Contents
 - [Introduction](#introduction)
+- [Methodology](#methodology)
 - [Setup instructions](#setup-instructions)
 - [Extraction](#extraction)
 - [Transformation](#transformation)
 - [Loading](#loading)
 - [Data Schema](#data-schema)
 - [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
 - [Licensing](#licensing)
 - [Collaborators](#collaborators)
 - [Acknowledgements](#acknowledgements)
@@ -47,7 +47,32 @@ The following requirements have to be met for the ETL pipeline to run successful
 ### Data Pipeline Diagram
 To provide a clear overview of the ETL process, below is a diagram illustrating the various steps involved in the pipeline:
 
-![Alt text](pipeline.drawio.png)
+![Alt text](images/pipeline.drawio.png)
+
+## Methodology
+
+Our team adopted Agile methodologies, facilitated through Microsoft Teams for all meetings and communication. The Scrum Master sent out calendar invites for all ceremonies, ensuring everyone was aware of scheduled activities. Here's a breakdown of our Agile practices:
+
+- **Daily Stand-ups:** Conducted every morning to discuss progress, obstacles, and plans for the day.
+- **Sprint Planning:** Held daily to plan tasks for the sprint, ensuring a clear roadmap for the upcoming work.
+- **Sprint Reviews:** Conducted daily or every 1.5 days, depending on our progress, to review completed work and gather feedback.
+- **Retrospectives:** Held regularly to reflect on our process and identify areas for improvement.
+- **User Stories:** Managed using Microsoft Planner, where we documented acceptance criteria and checked off tasks upon meeting the definition of done.
+- **Role Rotation:** Team members took turns acting as Scrum Master and Product Owner, rotating every two days.
+- **Stakeholder Interaction:** Trainers acted as stakeholders, providing feedback and direction.
+- **Daily Review:** We reviewed user stories daily to ensure alignment and progress.
+- **Subgroup Collaboration:** We broke into subgroups to tackle specific tasks before reconvening for updates and integration.
+- **Project Overview:** Maintained a project overview document on SharePoint, accessible to all team members for reference and updates.
+
+## Challenges
+
+1. **Concurrent Responsibilities:** Balancing work on our Final Quality Gate presentation and interview preparation alongside the project was challenging.
+2. **Lack of Dedicated Roles:** The absence of a dedicated Product Owner and Scrum Master sometimes led to role-related inefficiencies.
+3. **Data Cleaning Issues:** We encountered inaccuracies in our initial data cleaning, stemming from inconsistent formats and structures (e.g., lists and dictionaries instead of strings). This required us to fix the issues and re-run the pipeline.
+4. **Communication Hurdles:** Early on, we faced issues with team members talking over each other in meetings. This was quickly resolved by utilising the 'raise hand' feature in Teams, facilitated by the Scrum Master.
+
+By addressing these challenges and continuously refining our process, we were able to maintain productivity and deliver on our project goals.
+
 
 ## Setup instructions 
 
@@ -101,7 +126,7 @@ Academy contents: Data collected from all the Spartans in the academy, with thei
 ## Transformation
 
 Image to show which columns are found in the different files:
-![Alt text](files.png)
+![Alt text](images/files.png)
 
 ### JSON files: 
 
@@ -284,7 +309,7 @@ By following this process, we ensure that our data is stored in a well-structure
 The database schema for the Final Project ETL pipeline consists of multiple interconnected tables designed to store and manage the extracted and transformed data efficiently. Below is a description of each table, including its columns and relationships:
 
 ### Entity Relationship Diagram
-![Alt text](erd.png)
+![Alt text](images/erd.png)
 
 ### APPLICANTS
 
@@ -400,26 +425,15 @@ The database schema for the Final Project ETL pipeline consists of multiple inte
 
 This schema ensures that all relevant data is stored in a normalized form, facilitating efficient querying and data integrity.
 
-## Collaborators
+## SQL Normalization Explanation
 
+In this section, we provide an overview of the SQL code used for normalizing our data. Normalization is essential to reduce redundancy and ensure data integrity.
 
-| Name                                     |
-|------------------------------------------|
-| Dafydd Lloyd (Product Owner/Developer)   |
-| Jacqueline Onyemechi Ochonma (Developer) |
-| James O'Brien (Product Owner)            |
-| Kazim Raza (Developer)                   |
-| Kehinde Giwa (Developer)                 |
-| Kyun Philip-Lessells (Developer)         |
-| Sabrina Kaur (Scrum Master/Developer)    |
-| Samuel Smith (Scrum Master)              |
-| Yoonhee Lee (Developer)                  |
-| Luis Rodriguez Valido (Developer)        |
-| Rajpal Aujla (Developer)                 |             
+### Normalization Process
 
+Normalization typically involves organizing the columns and tables of a database to minimize redundancy and dependency. We followed standard normalization forms, primarily focusing on achieving the Third Normal Form (3NF).
 
-
-
+## SQL KAZIM ....................
 
 ## Testing
 
@@ -623,7 +637,23 @@ def test_access_denied(test_s3_boto):
 ### Test Environment Setup
 For testing, we utilised pytest as our testing framework, leveraging its capabilities to run unit tests and manage test fixtures effectively. Each test case was designed to validate specific functionalities and edge cases within our ETL pipeline, ensuring robustness and reliability across different scenarios.
 
-## Troubleshooting
+
+## Collaborators
+
+
+| Name                                     |
+|------------------------------------------|
+| Dafydd Lloyd (Product Owner/Developer)   |
+| Jacqueline Onyemechi Ochonma (Developer) |
+| James O'Brien (Product Owner)            |
+| Kazim Raza (Developer)                   |
+| Kehinde Giwa (Developer)                 |
+| Kyun Philip-Lessells (Developer)         |
+| Sabrina Kaur (Scrum Master/Developer)    |
+| Samuel Smith (Scrum Master)              |
+| Yoonhee Lee (Developer)                  |
+| Luis Rodriguez Valido (Developer)        |
+| Rajpal Aujla (Developer)                 |  
 
 ## Licensing
 
