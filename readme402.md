@@ -433,7 +433,25 @@ In this section, we provide an overview of the SQL code used for normalizing our
 
 Normalization typically involves organizing the columns and tables of a database to minimize redundancy and dependency. We followed standard normalization forms, primarily focusing on achieving the Third Normal Form (3NF).
 
-## SQL KAZIM ....................
+**Function that separates values that have are in a list format, so that our data is atomic.**
+![Alt text](images/k1.png)
+
+**Use that function to make a unique set of strengths, same is done for weaknesses.**
+![Alt text](images/k2.png)
+
+**As the comment mentions, altering the original data table columns for easier joins.**
+![Alt text](images/k3.png)
+
+**Joining all data via name for further data exploration.**
+![Alt text](images/k4.png)
+
+
+**Removing any columns that are irrelevant to match the schema.**
+![Alt text](images/k5.png)
+
+
+**Adding a primary for unique indexing.**
+![Alt text](images/k6.png)
 
 ## Testing
 
