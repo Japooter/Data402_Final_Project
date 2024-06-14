@@ -456,6 +456,16 @@ Normalization typically involves organizing the columns and tables of a database
 
 ![Alt text](images/k6.png)
 
+**Creating relevant junction tables for the applicant's strengths and weaknesses.**
+
+![Alt text](images/k7.png)
+
+**Creating additional tables and creating foreign keys based on the ERD diagram and then updating the 'Applicants' table to be referencing the created tables via primary key - foreign key relationships.**
+
+![Alt text](images/k8.png)
+
+
+
 ## Testing
 
 ### Overview
