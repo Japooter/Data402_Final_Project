@@ -5,7 +5,9 @@ import re
 from io import StringIO
 
 import numpy as np
+import pandas
 import pandas as pd
+import sqlalchemy
 import sqlalchemy as sa
 
 s3 = boto3.client('s3')
@@ -26,13 +28,18 @@ engine = sa.create_engine(connection_url, fast_executemany=True)
 
 
 def list_objects(bucket, prefix):
+    """
+    :param bucket:
+    :param prefix:
+    :return:
+    """
     response = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
     if 'Contents' in response:
         return [obj['Key'] for obj in response['Contents'] if obj['Key'] != prefix]
     return []
 
 
-def list_all_objects(bucket, prefix):
+def list_all_objects(bucket: str, prefix: str) -> list:
     all_objects = []
     continuation_token = None
 
@@ -53,7 +60,7 @@ def list_all_objects(bucket, prefix):
     return all_objects
 
 
-def load_academy_data(bucket, prefix):
+def load_academy_data(bucket: str, prefix: str) -> pd.DataFrame:
     files = list_all_objects(bucket, prefix)
     data_frames = []
     for file_key in files:
@@ -65,7 +72,7 @@ def load_academy_data(bucket, prefix):
     return pd.concat(data_frames, ignore_index=True)
 
 
-def check_talent_json_files(bucket, prefix):
+def check_talent_json_files(bucket: str, prefix: str) -> str:
     talent_list = list()
     files = list_all_objects(bucket, prefix)
     if not files:
@@ -101,7 +108,7 @@ def check_talent_json_files(bucket, prefix):
     return json.dumps(talent_list)
 
 
-def load_talent_csv_data(bucket, prefix):
+def load_talent_csv_data(bucket: str, prefix: str) -> pd.DataFrame:
     files = list_all_objects(bucket, prefix)
     data_frames = []
     for file_key in files:
@@ -116,38 +123,38 @@ def load_talent_csv_data(bucket, prefix):
     return pd.concat(data_frames, ignore_index=True)
 
 
-def list_txt_files(bucket, prefix):
+def list_txt_files(bucket: str, prefix: str) -> list:
     all_files = list_all_objects(bucket, prefix)
     txt_files = [file for file in all_files if file.endswith('.txt')]
     return txt_files
 
 
-def clean_whitespace(text):
+def clean_whitespace(text: str) -> str:
     try:
         return text.strip()
     except:
         return text
 
 
-def get_category(filename):
+def get_category(filename: str) -> str:
     splits = filename.split("_")
     category = splits[0]
     return category
 
 
-def get_stream(filename):
+def get_stream(filename: str) -> str:
     splits = filename.split("_")
     stream_name = "".join(splits[0:2])
     return stream_name
 
 
-def get_date(filename):
+def get_date(filename: str) -> datetime.date:
     splits = filename.split("_")
     date = datetime.datetime.strptime(splits[2], "%Y-%m-%d").date()
     return date
 
 
-def clean_month(month_name):
+def clean_month(month_name: str) -> str:
     #print(month_name)
     if month_name:
         month_name2 = month_name[:-4].strip()
@@ -161,7 +168,7 @@ def clean_month(month_name):
         return month_name
 
 
-def clean_phone_numbers(phone_no):
+def clean_phone_numbers(phone_no: str) -> str:
     to_replace = ["-", " ", "(", ")"]
     try:
         for item in to_replace:
@@ -171,7 +178,7 @@ def clean_phone_numbers(phone_no):
         return phone_no
 
 
-def combine_date_and_month(invited_day, month):
+def combine_date_and_month(invited_day: float, month: str) -> datetime.date:
     try:
         invited_date = str(int(invited_day)) + '-' + month
         return_date = datetime.datetime.strptime(invited_date, '%d-%B-%Y').date()
@@ -180,7 +187,7 @@ def combine_date_and_month(invited_day, month):
         return month
 
 
-def dobs_to_datetime(date_ofb):
+def dobs_to_datetime(date_ofb: str) -> datetime.date:
     try:
         strp_dob = datetime.datetime.strptime(date_ofb, '%d/%m/%Y').date()
         return strp_dob
@@ -188,7 +195,7 @@ def dobs_to_datetime(date_ofb):
         return date_ofb
 
 
-def capitalise(string):
+def capitalise(string: str) -> str:
     try:
         string = string.title()
         return string
@@ -196,7 +203,7 @@ def capitalise(string):
         return string
 
 
-def get_txt_file_contents(bucket, key):
+def get_txt_file_contents(bucket: str, key: str):
     # Retrieve the object from S3
     response = s3.get_object(Bucket=bucket, Key=key)
     # Read the content of the file
@@ -204,7 +211,7 @@ def get_txt_file_contents(bucket, key):
     return content
 
 
-def parse_txt_content(content):
+def parse_txt_content(content) -> list:
     lines = content.strip().split('\n')
     date = lines[0]
     academy = lines[1]
@@ -219,7 +226,7 @@ def parse_txt_content(content):
     return data
 
 
-def combine_txt_files(bucket, prefix):
+def combine_txt_files(bucket: str, prefix: str) -> pandas.DataFrame:
     txt_files = list_txt_files(bucket, prefix)
     all_data = []
     for txt_file in txt_files:
@@ -230,12 +237,25 @@ def combine_txt_files(bucket, prefix):
     df = pd.DataFrame(all_data, columns=['date', 'academy', 'name', 'psychometric_score', 'presentation_score'])
     return df
 
-def remove_wildcards(name):
+
+def remove_wildcards(name: str) -> str:
     new_name = re.sub("[^A-Za-z'' -]", "", name)
     return new_name
 
 
-def clean_academy_csv():
+def replace_yes_no_bool(string: str) -> bool:
+    out = None
+    try:
+        if string.lower() == "yes":
+            out = True
+        elif string.lower() == "no":
+            out = False
+        return out
+    except:
+        return None
+
+
+def clean_academy_csv() -> pandas.DataFrame:
     academy_data = load_academy_data('data-402-final-project', 'Academy/')
 
     cols = list(academy_data.columns.values)
@@ -252,7 +272,7 @@ def clean_academy_csv():
     return academy_data
 
 
-def clean_talent_json():
+def clean_talent_json() -> pandas.DataFrame:
     bucket_name = 'data-402-final-project'
     talent_prefix = 'Talent/'
 
@@ -263,6 +283,9 @@ def clean_talent_json():
     df['weaknesses'] = df['weaknesses'].apply(str)
     df['strengths'] = df['strengths'].apply(str)
     df['name'] = df['name'].apply(capitalise)
+    df['self_development'] = df['self_development'].apply(replace_yes_no_bool)
+    df['geo_flex'] = df['geo_flex'].apply(replace_yes_no_bool)
+    df['financial_support_self'] = df['financial_support_self'].apply(replace_yes_no_bool)
 
     df = df.drop_duplicates()
 
@@ -271,7 +294,7 @@ def clean_talent_json():
     return df
 
 
-def clean_talent_csv():
+def clean_talent_csv() -> pandas.DataFrame:
     bucket_name = 'data-402-final-project'
     talent_prefix = 'Talent/'
 
@@ -295,7 +318,7 @@ def clean_talent_csv():
     return talent_data
 
 
-def clean_talent_txt():
+def clean_talent_txt() -> pandas.DataFrame:
     bucket_name = 'data-402-final-project'
     talent_prefix = 'Talent/'
 
@@ -314,9 +337,20 @@ def clean_talent_txt():
     return talent_txt_files
 
 
-def insert_into_sql(dataframe, engine, tablename):
+def insert_into_sql(dataframe: pandas.DataFrame, engine: sqlalchemy.Engine, tablename: str) -> None:
     dataframe.to_sql(tablename, engine, schema="dbo", if_exists="replace", index=False)
     return
+
+
+def create_score_data(academy_data: pandas.DataFrame) -> pandas.DataFrame:
+    academy_data_melted = academy_data.melt(id_vars=['category', 'stream', 'date', 'name', 'trainer'],
+                                            var_name='variable', value_name='Score')
+    academy_data_melted['week'] = academy_data_melted['variable'].str.extract(r'W(\d+)$')
+    academy_data_melted['week'] = academy_data_melted['week'].apply(int)
+    academy_data_melted['behaviour'] = academy_data_melted['variable'].str.extract(r'^(\w+)_')
+    academy_data_melted = academy_data_melted.drop(columns=['variable'])
+
+    return academy_data_melted
 
 
 if __name__ == "__main__":
@@ -343,3 +377,7 @@ if __name__ == "__main__":
     talent_txt = clean_talent_txt()
     insert_into_sql(talent_txt, engine, "Talent_TXT")
     print("Successfully inserted talent txt data!")
+
+    # Create Score table
+    academy_data_melted = create_score_data(academy_data)
+    insert_into_sql(academy_data_melted, engine, "Score")
