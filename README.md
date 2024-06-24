@@ -18,29 +18,27 @@
 
 ## Introduction
 
-### Project overview 
+### Project overview:
 
 **Task:** 
 
-Create an ETL pipeline from mock data from a fictionalised version of Sparta global and generate some analytical insights to present to stakeholders. 
+Create an ETL pipeline using mock data from a fictionalised version of Sparta Global and generate some analytical insights to present to stakeholders. 
 
 **Task Requirements:**
 
-- The code needs to be at production-level (easily reuseable). 
+- The code needs to be at production-level (easily reusable). 
 
-- Have an appropriate data store that will house all the data drawn from the files, the database should provide a single-person view. 
-
- 
+- Have an appropriate data store that will house all the data drawn from the files, the database should provide a single-person view.
 
 **Prerequisites:**
 
 The following requirements have to be met for the ETL pipeline to run successfully:
 
-- Ensure the latest version of python has been installed. 
+- Ensure the latest version of Python has been installed. 
 
-- Ensure you have PyCharm, Docker and Azure studio installed and running correctly. 
+- Ensure you have PyCharm, Docker and Azure Studio installed and running correctly. 
 
-- Required python libraries to import: boto3, pandas, NumPy, pytest, json, SQL alchemy (requirements.txt). 
+- Required Python libraries to import: boto3, pandas, NumPy, pytest, json, SQL alchemy (requirements.txt). 
 
 - Credentials to access the ‘data-402-final-project’ S3 bucket needs to be requested from Sparta Global. 
 
@@ -49,22 +47,25 @@ To provide a clear overview of the ETL process, below is a diagram illustrating 
 
 ![Alt text](images/pipeline.drawio.png)
 
-## Methodology
+## Methodology:
 
 Our team adopted Agile methodologies, facilitated through Microsoft Teams for all meetings and communication. The Scrum Master sent out calendar invites for all ceremonies, ensuring everyone was aware of scheduled activities. Here's a breakdown of our Agile practices:
 
-- **Daily Stand-ups:** Conducted every morning to discuss progress, obstacles, and plans for the day.
+- **Daily Stand-ups:** Conducted every morning to discuss progress, obstacles, and plans for the day. We reviewed *user stories* daily to ensure alignment and progress.
 - **Sprint Planning:** Held daily to plan tasks for the sprint, ensuring a clear roadmap for the upcoming work.
 - **Sprint Reviews:** Conducted daily or every 1.5 days, depending on our progress, to review completed work and gather feedback.
 - **Retrospectives:** Held regularly to reflect on our process and identify areas for improvement.
-- **User Stories:** Managed using Microsoft Planner, where we documented acceptance criteria and checked off tasks upon meeting the definition of done.
-- **Role Rotation:** Team members took turns acting as Scrum Master and Product Owner, rotating every two days.
-- **Stakeholder Interaction:** Trainers acted as stakeholders, providing feedback and direction.
-- **Daily Review:** We reviewed user stories daily to ensure alignment and progress.
-- **Subgroup Collaboration:** We broke into subgroups to tackle specific tasks before reconvening for updates and integration.
-- **Project Overview:** Maintained a project overview document on SharePoint, accessible to all team members for reference and updates.
+- **User Stories:** Managed using *Microsoft Planner*, where we documented acceptance criteria and checked off tasks upon meeting the definition of done.
+- **Role Rotation:** Team members took turns acting as Scrum Master and Product Owner, rotating *every two days*, as seen in the table below:<br>
 
-## Challenges
+
+![img.png](img.png)
+
+- **Stakeholder Interaction:** *Trainers acted as stakeholders*, providing feedback and direction.
+- **Subgroup Collaboration:** We broke into subgroups to tackle specific tasks before reconvening for updates and integration.
+- **Project Overview:** Maintained a project overview document on *SharePoint*, accessible to all team members for reference and updates.
+
+## Challenges:
 
 1. **Concurrent Responsibilities:** Balancing work on our Final Quality Gate presentation and interview preparation alongside the project was challenging.
 2. **Lack of Dedicated Roles:** The absence of a dedicated Product Owner and Scrum Master sometimes led to role-related inefficiencies.
@@ -78,77 +79,77 @@ By addressing these challenges and continuously refining our process, we were ab
 
 ### 1. Install required software
 
-1. Install Python: [Python Releases | Python.org ](https://www.python.org/downloads/)
-
-2. Install Docker: [Install Docker Engine | Docker Docs](https://docs.docker.com/engine/install/)
-
-3. Install Azure Data Studio: [Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio)
+- Install Python: [Python Releases | Python.org ](https://www.python.org/downloads/)
+- Install Docker: [Install Docker Engine | Docker Docs](https://docs.docker.com/engine/install/)<br>
+- Install Azure Data Studio: [Download and install Azure Data Studio - Azure Data Studio | Microsoft Learn](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio)
 
 
 ### 2. Install ODBS Driver
 
-1. Install ODBS 17 driver: [Download ODBC Driver for SQL Server](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16#version-17)
+- Install ODBS 17 driver: [Download ODBC Driver for SQL Server](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16#version-17)
 
-### 3. Setup azure sql edge Docker container
+### 3. Setup Azure SQL Edge Docker container
 
 ***Note:*** *If you are not on Windows, preface these commands with sudo*
-
-1. Pull the Azure SQL Edge container
+- Pull the Azure SQL Edge container
  `docker pull mcr.microsoft.com/azure-sql-edge:latest`
 
-2. Deploy the container using
+- Deploy the container using
  `docker run --cap-add SYS_PTRACE -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD=yourStrong(!)Password -p 1433:1433 --name azuresqledge -d mcr.microsoft.com/azure-sql-edge`
 
 ### 4. Connect with Azure Data Studio
 
- 1. Open Azure Data Studio
- 2. Create a Connection
- 3. Use details
+- Open Azure Data Studio.
+- Create a Connection.
+- Use details:
     - Connection type: `Microsoft SQL Server`
     - Server: `localhost,1433`
     - Authenitcation type: `SQL Login`
     - User name: `sa`
     - Password: `yourStrong(!)Password`
     - Trust server certificate: `True`
- 4. After connecting, run the code `CREATE DATABASE FinalProject;`
+- After connecting, run the code `CREATE DATABASE FinalProject;`
 
 
 ### 5. Clone the project repository to your local machine
 
-1. `$ git clone https://github.com/Japooter/Data402_Final_Project.git`
+- `$ git clone https://github.com/Japooter/Data402_Final_Project.git`
 
 
 ### 6. Install the required python libraries
 
-1. `pip install -r requirements.txt`
+- `pip install -r requirements.txt`
 
 ### 5. Run scripts
- 1. First run the main.py file with your parameters
+- First run the main.py file with your parameters
     - `python -m main -server 127.0.0.1 -db FinalProject -user sa -password yourStrong(!)Password`
- 2. Open the file [sql/Complete_Code.sql](sql/Complete_Code.sql) in Azure Data Studio
- 3. Run the Complete_Code.sql file
+- Open the file [sql/Complete_Code.sql](sql/Complete_Code.sql) in Azure Data Studio.
+- Run the Complete_Code.sql file.
 
-### 6. Congratulations, you now have the complete database setup
+### 6. Congratulations, you now have the complete database setup!
 
 ## Extraction
-The Sparta global mock data was extracted from the Amazon S3 bucket 'data-402-final-project bucket which contained two further prefixes Talent and academy. 
+The Sparta global mock data was extracted from the Amazon S3 `data-402-final-project` bucket which contained two further prefixes: Talent and Academy. 
 
-Talent contents: Data collected on the Sparta day event, contains information about candidate competency, the outcome of behaviour and their performance and various recruitment tests.
-- `.json`
-- `.csv`
-- `.txt`  
+**Talent contents**: 
+<br>Data collected on the Sparta day event, contains information about candidate competency, the outcome of behaviour and their performance and various recruitment tests.
+  - `.json`
+  - `.csv`
+  - `.txt`  
 
-Academy contents: Data collected from all the Spartans in the academy, with their names, courses and what score they were getting in their weekly tests.
-- `.csv` 
+**Academy contents**:
+<br>Data collected from all the Spartans in the academy, with their names, courses and what score they were getting in their weekly tests.
+  - `.csv` 
 
 ## Transformation
 
 Image to show which columns are found in the different files:
+
 ![Alt text](images/files.png)
 
 ### JSON files: 
 
-- The Talent JSON files were loaded into a pandas DataFrame 
+- The Talent JSON files were loaded into a pandas DataFrame.
 
 - NaN values were identified  in the tech_self_score column and were converted into an empty dictionary string, ‘{}'. 
 
@@ -158,7 +159,7 @@ Image to show which columns are found in the different files:
 
 ### Academy CSV files: 
 
-- The academy CSV files were loaded into a pandas DataFrame 
+- The academy CSV files were loaded into a pandas DataFrame.
 
 - Whitespace was cleaned before and after the entry of each string. 
 
@@ -168,7 +169,7 @@ Image to show which columns are found in the different files:
 
 ### Talent CSV files: 
 
-- The talent CSV files were loaded into a pandas DataFrame 
+- The talent CSV files were loaded into a pandas DataFrame.
 
 - Special characters such as "-", " ", "(", and ")" were removed from the phone number column. 
 
@@ -189,19 +190,19 @@ Image to show which columns are found in the different files:
 
 - The talent txt files were loaded into a pandas DataFrame. 
 
-- Whitespace characters were removed from the ‘date’, ‘name’ and ‘academy column  
+- Whitespace characters were removed from the ‘date’, ‘name’ and ‘academy' column.
 
-- The ‘psychometric_score’ and ‘presentation_score’ columns were converted into the integer data type 
+- The ‘psychometric_score’ and ‘presentation_score’ columns were converted into the integer data type.
 
 - Checked for duplicate and null values but there were none. 
 
-- The ‘date’ column was converted into the ‘datetime.date’ format 
+- The ‘date’ column was converted into the ‘datetime.date’ format.
 
 ## Loading
 
 After extracting and transforming the data, the final step in our ETL pipeline is loading the cleaned data into our database for further analysis and reporting. This process involves the following steps:
 
-### 1. Setup the Database:
+### 1. Set up the Database:
 
 - We used **Azure Data Studio** to create a database named **FinalProject**. This database is hosted on a **SQL Edge** server.
 
@@ -228,7 +229,10 @@ Here is a high-level overview of the Python script:
 
 - Dependencies:
 
-  - The script utilises various libraries including **boto3** for **S3** interactions, **pandas** for data manipulation, and **sqlalchemy** for database operations.
+  The script utilises various libraries including:
+    - **boto3** for **S3** interactions
+    - **pandas** for data manipulation
+    - **sqlalchemy** for database operations
 
 - Connection Setup:
 
@@ -314,7 +318,7 @@ if __name__ == "__main__":
     insert_into_sql(talent_txt, engine, "Talent_TXT")
     print("Successfully inserted talent txt data!")
 ```
-## 4. Normalization and Relationships:
+### 4. Normalization and Relationships:
 
 - After loading the data into the SQL database, the data was further normalized to ensure efficiency and integrity. **Primary Keys** (PKs), **Foreign Keys** (FKs), and **junction tables** were established to create relationships between the data tables, ensuring a single view of each candidate.
 
@@ -388,7 +392,7 @@ The database schema for the Final Project ETL pipeline consists of multiple inte
 
 ### TECH_SKILL_APPLICANT
 - `applicant_ID (PK, FK1)`: References `applicant_ID` in the `APPLICANTS` table.
-- `tech_skill_ID (PK, FK2)`: References `tech_skill_ID` in the TECH_SKILL table.
+- `tech_skill_ID (PK, FK2)`: References `tech_skill_ID` in the `TECH_SKILL` table.
 - `score`: Skill score for the applicant.
 
 ### TECH_SKILL
@@ -410,15 +414,15 @@ The database schema for the Final Project ETL pipeline consists of multiple inte
 - `weakness_ID (FK)`: References `weakness_ID` in the `WEAKNESSES` table.
 
 ### WEAKNESSES
-- `weakness_ID (PK)`: Unique identifier for each weakness.
+- `weakness_ID (PK)`: Unique identifier for each `weakness_name`.
 - `weakness_name`: Name of the weakness.
 
 ### STRENGTH_JUNCTION
-- `applicant_ID (FK)`: References applicant_ID in the APPLICANTS table.
+- `applicant_ID (FK)`: References `applicant_ID` in the `APPLICANTS` table.
 - `strength_ID (FK)`: References `strength_ID` in the `STRENGTHS` table.
 
 ### STRENGTHS
-- `strength_ID (PK)`: Unique identifier for each `strength`.
+- `strength_ID (PK)`: Unique identifier for each `strength_name`.
 - `strength_name`: Name of the strength.
 
 ### TALENT_COORDINATORS
@@ -452,12 +456,15 @@ In this section, we provide an overview of the SQL code used for normalizing our
 Normalization typically involves organizing the columns and tables of a database to minimize redundancy and dependency. We followed standard normalization forms, primarily focusing on achieving the Third Normal Form (3NF).
 
 **Function that separates values that have are in a list format, so that our data is atomic.**
+
 ![Alt text](images/k1.png)
 
 **Use that function to make a unique set of strengths, same is done for weaknesses.**
+
 ![Alt text](images/k2.png)
 
 **As the comment mentions, altering the original data table columns for easier joins.**
+
 ![Alt text](images/k3.png)
 
 **Joining all data via name for further data exploration.**
@@ -486,11 +493,10 @@ Normalization typically involves organizing the columns and tables of a database
 
 ## Testing
 
-### Overview
 Testing is an integral part of ensuring the reliability and correctness of the ETL pipeline developed for the Data 402 Final Project. Our testing strategy encompasses various aspects of the pipeline, including data extraction, transformation, loading processes, as well as ensuring robust error handling for different scenarios.
 
-## Test Cases
-## **Data Extraction**
+### Test Cases:
+### i. Data Extraction
 
 1. ### Incorrect Bucket Name (Academy Data)
 
@@ -517,7 +523,7 @@ Testing is an integral part of ensuring the reliability and correctness of the E
 -  **Description**: Tests handling of exceptions when an incorrect bucket name is provided for Talent CSV data extraction.
 -  **Test Code**: `test_incorrect_bucket_talent_csv()`
 
-## **Data Transformation**
+### ii. **Data Transformation**
 
 6. ### Whitespace Cleaning
 
@@ -544,14 +550,14 @@ Testing is an integral part of ensuring the reliability and correctness of the E
 -  **Description**: Tests the function `capitalise()` for capitalizing strings correctly.
 -  **Test Code**: `test_capitalisation()`
 
-## **SQL Operations**
+### iii. **SQL Operations**
 
 11. ### Insertion into SQL Database
 -  **Description**: Tests the function `insert_into_sql()` for inserting data into the SQL database.
 -  **Test Code**: `test_wrong_sql_info()`
 
 
-**Additional Functionalities**
+### iv. **Additional Functionalities**
 
 12. ### Date Parsing
 
@@ -568,6 +574,7 @@ Testing is an integral part of ensuring the reliability and correctness of the E
 -  **Description**: Tests the function `get_category()` for extracting category names from filenames.
 -  **Test Code**: `test_get_category()`
 
+### Testing Code:
 ```commandline
 from clean_import import *
 
@@ -683,11 +690,11 @@ def test_access_denied(test_s3_boto):
 ```
 
 
-### Test Environment Setup
-For testing, we utilised pytest as our testing framework, leveraging its capabilities to run unit tests and manage test fixtures effectively. Each test case was designed to validate specific functionalities and edge cases within our ETL pipeline, ensuring robustness and reliability across different scenarios.
+### Test Environment Setup:
+For testing, we utilised *pytest* as our testing framework, leveraging its capabilities to run unit tests and manage test fixtures effectively. Each test case was designed to validate specific functionalities and edge cases within our ETL pipeline, ensuring robustness and reliability across different scenarios.
 
 
-## Collaborators
+## Collaborators:
 
 
 | Name                                                |
@@ -704,13 +711,13 @@ For testing, we utilised pytest as our testing framework, leveraging its capabil
 | Luis Rodriguez Valido (Developer)                   |
 | Rajpal Aujla (Developer)                            |  
 
-## Licensing
+## Licensing:
 
 This project is the intellectual property of Sparta Global. As trainee data engineers at Sparta Global, our work including data extraction, transformation, and loading (ETL) processes utilised resources from Sparta Global's infrastructure, including the use of their S3 bucket for data storage. All rights, including but not limited to intellectual property rights, remain with Sparta Global.
 
 For licensing inquiries or further information, please contact Sparta Global directly.
 
-## Acknowledgements 
+## Acknowledgements:
 
 We would like to extend our gratitude to the following individuals for their invaluable contributions to this project:
 
@@ -720,7 +727,7 @@ We would like to extend our gratitude to the following individuals for their inv
 - James O'Brien
 - Kazim Raza
 - Kehinde Giwa
-- Kyun Philip-Lessells
+- Kyrun Philip-Lessells
 - Sabrina Kaur
 - Samuel Smith
 - Yoonhee Lee
