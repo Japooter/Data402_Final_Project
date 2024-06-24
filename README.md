@@ -327,7 +327,7 @@ By following this process, we ensure that our data is stored in a well-structure
 The database schema for the Final Project ETL pipeline consists of multiple interconnected tables designed to store and manage the extracted and transformed data efficiently. Below is a description of each table, including its columns and relationships:
 
 ### Entity Relationship Diagram
-![Alt text](images/erd.png)
+![Alt text](images/ERD2.svg)
 
 ### APPLICANTS
 
