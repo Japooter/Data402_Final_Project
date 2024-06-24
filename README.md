@@ -59,7 +59,7 @@ Our team adopted Agile methodologies, facilitated through Microsoft Teams for al
 - **Role Rotation:** Team members took turns acting as Scrum Master and Product Owner, rotating *every two days*, as seen in the table below:<br>
 
 
-![img.png](img.png)
+![scrum_rotation_table.png](images/scrum_rotation_table.png)
 
 - **Stakeholder Interaction:** *Trainers acted as stakeholders*, providing feedback and direction.
 - **Subgroup Collaboration:** We broke into subgroups to tackle specific tasks before reconvening for updates and integration.
